@@ -1,0 +1,135 @@
+---
+sidebar: sidebar 
+permalink: cyber-vault/ontap-cyber-vault-ps-creation.html 
+keywords: Cyber vault, powershell, script, configuration, validation, hardening 
+summary: Questa è la soluzione NetApp ONTAP per la configurazione, il rafforzamento e la convalida di un cyber vault basato su ONTAP 
+---
+= Creazione di un cyber vault ONTAP con PowerShell
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+I backup air-gapping che utilizzano metodi tradizionali comportano la creazione di spazio e la separazione fisica del supporto primario e secondario.  Spostando i media fuori sede e/o interrompendo la connettività, i malintenzionati non hanno accesso ai dati.  Ciò protegge i dati ma può comportare tempi di ripristino più lenti.  Con SnapLock Compliance non è richiesta alcuna separazione fisica.  SnapLock Compliance protegge le copie di sola lettura e punto nel tempo degli snapshot archiviati, garantendo dati rapidamente accessibili, al sicuro da cancellazioni o indelebili e al sicuro da modifiche o immutabili.
+
+
+
+== Prerequisiti
+
+Prima di iniziare con i passaggi descritti nella sezione successiva di questo documento, assicurarsi che siano soddisfatti i seguenti prerequisiti:
+
+* Il cluster di origine deve eseguire ONTAP 9 o versione successiva.
+* Gli aggregati di origine e destinazione devono essere a 64 bit.
+* I cluster di origine e di destinazione devono essere peering.
+* Le SVM di origine e di destinazione devono essere peering.
+* Assicurarsi che la crittografia del peering del cluster sia abilitata.
+
+
+L'impostazione del trasferimento dei dati in un cyber vault ONTAP richiede diversi passaggi.  Sul volume primario, configurare un criterio di snapshot che specifichi quali copie creare e quando crearle utilizzando pianificazioni appropriate e assegnare etichette per specificare quali copie devono essere trasferite da SnapVault.  Sul secondario, è necessario creare una policy SnapMirror che specifichi le etichette delle copie Snapshot da trasferire e quante di queste copie devono essere conservate nel cyber vault.  Dopo aver configurato queste policy, creare la relazione SnapVault e stabilire una pianificazione del trasferimento.
+
+
+NOTE: Questo documento presuppone che l'archiviazione primaria e il cyber vault ONTAP designato siano già impostati e configurati.
+
+
+NOTE: Il cluster di Cyber Vault può trovarsi nello stesso data center dei dati di origine o in un data center diverso.
+
+
+
+== Passaggi per creare un cyber vault ONTAP
+
+. Utilizzare ONTAP CLI o System Manager per inizializzare il clock di conformità.
+. Creare un volume di protezione dati con la conformità SnapLock abilitata.
+. Utilizzare il comando di creazione SnapMirror per creare relazioni di protezione dei dati SnapVault .
+. Imposta il periodo di conservazione predefinito SnapLock Compliance per il volume di destinazione.
+
+
+
+NOTE: La conservazione predefinita è "Impostata al minimo".  A un volume SnapLock che è una destinazione di vault è assegnato un periodo di conservazione predefinito.  Il valore per questo periodo è inizialmente impostato su un minimo di 0 anni e un massimo di 100 anni (a partire da ONTAP 9.10.1.  Per le versioni precedenti ONTAP , il valore è 0 - 70.) per i volumi SnapLock Compliance .  Inizialmente, ogni copia NetApp Snapshot viene impegnata con questo periodo di conservazione predefinito.  Se necessario, il periodo di conservazione può essere esteso in seguito, ma non può mai essere abbreviato. Per ulteriori informazioni, consultare link:https://docs.netapp.com/us-en/ontap/snaplock/set-retention-period-task.html["Panoramica del tempo di conservazione impostato"^] .
+
+Quanto sopra comprende passaggi manuali.  Gli esperti di sicurezza consigliano di automatizzare il processo per evitare la gestione manuale che introduce un ampio margine di errore.  Di seguito è riportato il frammento di codice che automatizza completamente i prerequisiti e la configurazione della conformità SnapLock e l'inizializzazione dell'orologio.
+
+Ecco un esempio di codice PowerShell per inizializzare il clock di conformità ONTAP .
+
+[source, powershell]
+----
+function initializeSnapLockComplianceClock {
+    try {
+        $nodes = Get-NcNode
+
+        $isInitialized = $false
+        logMessage -message "Cheking if snaplock compliance clock is initialized"
+        foreach($node in $nodes) {
+            $check = Get-NcSnaplockComplianceClock -Node $node.Node
+            if ($check.SnaplockComplianceClockSpecified -eq "True") {
+                $isInitialized = $true
+            }
+        }
+
+        if ($isInitialized) {
+            logMessage -message "SnapLock Compliance clock already initialized" -type "SUCCESS"
+        } else {
+            logMessage -message "Initializing SnapLock compliance clock"
+            foreach($node in $nodes) {
+                Set-NcSnaplockComplianceClock -Node $node.Node
+            }
+            logMessage -message "Successfully initialized SnapLock Compliance clock" -type "SUCCESS"
+        }
+    } catch {
+        handleError -errorMessage $_.Exception.Message
+    }
+}
+
+----
+Ecco un esempio di codice PowerShell per configurare un cyber vault ONTAP .
+
+[source, powershell]
+----
+function configureCyberVault {
+    for($i = 0; $i -lt $DESTINATION_VOLUME_NAMES.Length; $i++) {
+        try {
+            # checking if the volume already exists and is of type snaplock compliance
+            logMessage -message "Checking if SnapLock Compliance volume $($DESTINATION_VOLUME_NAMES[$i]) already exists in vServer $DESTINATION_VSERVER"
+            $volume = Get-NcVol -Vserver $DESTINATION_VSERVER -Volume $DESTINATION_VOLUME_NAMES[$i] | Select-Object -Property Name, State, TotalSize, Aggregate, Vserver, Snaplock | Where-Object { $_.Snaplock.Type -eq "compliance" }
+            if($volume) {
+                $volume
+                logMessage -message "SnapLock Compliance volume $($DESTINATION_VOLUME_NAMES[$i]) already exists in vServer $DESTINATION_VSERVER" -type "SUCCESS"
+            } else {
+                # Create SnapLock Compliance volume
+                logMessage -message "Creating SnapLock Compliance volume: $($DESTINATION_VOLUME_NAMES[$i])"
+                New-NcVol -Name $DESTINATION_VOLUME_NAMES[$i] -Aggregate $DESTINATION_AGGREGATE_NAMES[$i] -SnaplockType Compliance -Type DP -Size $DESTINATION_VOLUME_SIZES[$i] -ErrorAction Stop | Select-Object -Property Name, State, TotalSize, Aggregate, Vserver
+                logMessage -message "Volume $($DESTINATION_VOLUME_NAMES[$i]) created successfully" -type "SUCCESS"
+            }
+
+            # Set SnapLock volume attributes
+            logMessage -message "Setting SnapLock volume attributes for volume: $($DESTINATION_VOLUME_NAMES[$i])"
+            Set-NcSnaplockVolAttr -Volume $DESTINATION_VOLUME_NAMES[$i] -MinimumRetentionPeriod $SNAPLOCK_MIN_RETENTION -MaximumRetentionPeriod $SNAPLOCK_MAX_RETENTION -ErrorAction Stop | Select-Object -Property Type, MinimumRetentionPeriod, MaximumRetentionPeriod
+            logMessage -message "SnapLock volume attributes set successfully for volume: $($DESTINATION_VOLUME_NAMES[$i])" -type "SUCCESS"
+
+            # checking snapmirror relationship
+            logMessage -message "Checking if SnapMirror relationship exists between source volume $($SOURCE_VOLUME_NAMES[$i]) and destination SnapLock Compliance volume $($DESTINATION_VOLUME_NAMES[$i])"
+            $snapmirror = Get-NcSnapmirror | Select-Object SourceCluster, SourceLocation, DestinationCluster, DestinationLocation, Status, MirrorState | Where-Object { $_.SourceCluster -eq $SOURCE_ONTAP_CLUSTER_NAME -and $_.SourceLocation -eq "$($SOURCE_VSERVER):$($SOURCE_VOLUME_NAMES[$i])" -and $_.DestinationCluster -eq $DESTINATION_ONTAP_CLUSTER_NAME -and $_.DestinationLocation -eq "$($DESTINATION_VSERVER):$($DESTINATION_VOLUME_NAMES[$i])" -and ($_.Status -eq "snapmirrored" -or $_.Status -eq "uninitialized") }
+            if($snapmirror) {
+                $snapmirror
+                logMessage -message "SnapMirror relationship already exists for volume: $($DESTINATION_VOLUME_NAMES[$i])" -type "SUCCESS"
+            } else {
+                # Create SnapMirror relationship
+                logMessage -message "Creating SnapMirror relationship for volume: $($DESTINATION_VOLUME_NAMES[$i])"
+                New-NcSnapmirror -SourceCluster $SOURCE_ONTAP_CLUSTER_NAME -SourceVserver $SOURCE_VSERVER -SourceVolume $SOURCE_VOLUME_NAMES[$i] -DestinationCluster $DESTINATION_ONTAP_CLUSTER_NAME -DestinationVserver $DESTINATION_VSERVER -DestinationVolume $DESTINATION_VOLUME_NAMES[$i] -Policy $SNAPMIRROR_PROTECTION_POLICY -Schedule $SNAPMIRROR_SCHEDULE -ErrorAction Stop | Select-Object -Property SourceCluster, SourceLocation, DestinationCluster, DestinationLocation, Status, Policy, Schedule
+                logMessage -message "SnapMirror relationship created successfully for volume: $($DESTINATION_VOLUME_NAMES[$i])" -type "SUCCESS"
+            }
+
+        } catch {
+            handleError -errorMessage $_.Exception.Message
+        }
+    }
+}
+
+----
+. Una volta completati i passaggi sopra descritti, il caveau informatico air-gapped che utilizza SnapLock Compliance e SnapVault è pronto.
+
+
+Prima di trasferire i dati degli snapshot al cyber vault, è necessario inizializzare la relazione SnapVault .  Tuttavia, prima di ciò, è necessario eseguire un rafforzamento della sicurezza per proteggere il caveau.

@@ -1,0 +1,75 @@
+---
+sidebar: sidebar 
+permalink: cyber-vault/ontap-cyber-vault-ps-script.html 
+keywords: Cyber vault, powershell, script, configuration, validation, hardening 
+summary: Questa è la soluzione NetApp ONTAP per la configurazione, il rafforzamento e la convalida di un cyber vault basato su ONTAP 
+---
+= Configurare, analizzare, cron script
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+NetApp ha creato unlink:https://github.com/NetApp/ransomeware-cybervault-automation["singolo script scaricabile"^] e utilizzato per configurare, verificare e pianificare le relazioni del cyber vault.
+
+
+
+== Cosa fa questo script
+
+* Peering dei cluster
+* Peering SVM
+* Creazione del volume DP
+* Relazione e inizializzazione SnapMirror
+* Rafforzare il sistema ONTAP utilizzato per il cyber vault
+* Interrompere e riprendere la relazione in base al programma di trasferimento
+* Convalidare periodicamente le impostazioni di sicurezza e generare un report che mostri eventuali anomalie
+
+
+
+
+== Come usare questo script
+
+link:https://github.com/NetApp/ransomeware-cybervault-automation["Scarica lo script"^]e per utilizzare lo script, basta seguire i passaggi seguenti:
+
+* Avviare Windows PowerShell come amministratore.
+* Passare alla directory contenente lo script.
+* Eseguire lo script utilizzando `.\` sintassi insieme ai parametri richiesti
+
+
+
+NOTE: Si prega di verificare che tutte le informazioni siano state inserite.  Alla prima esecuzione (modalità di configurazione), verranno richieste le credenziali sia per il sistema di produzione sia per il nuovo sistema di cyber vault.  Dopodiché, creerà i peering SVM (se non esistenti), i volumi e lo SnapMirror tra il sistema e li inizializzerà.
+
+
+NOTE: La modalità Cron può essere utilizzata per pianificare la sospensione e la ripresa del trasferimento dei dati.
+
+
+
+== Modalità di funzionamento
+
+Lo script di automazione fornisce 3 modalità di esecuzione: `configure` , `analyze` E `cron` .
+
+[source, powershell]
+----
+if($SCRIPT_MODE -eq "configure") {
+        configure
+    } elseif ($SCRIPT_MODE -eq "analyze") {
+        analyze
+    } elseif ($SCRIPT_MODE -eq "cron") {
+        runCron
+    }
+----
+* Configura: esegue i controlli di convalida e configura il sistema come air-gapped.
+* Analizza: funzionalità di monitoraggio e reporting automatizzata per inviare informazioni ai gruppi di monitoraggio in caso di anomalie e attività sospette, per garantire che le configurazioni non vengano deviate.
+* Cron - Per abilitare l'infrastruttura disconnessa, la modalità cron automatizza la disabilitazione del LIF e mette in pausa la relazione di trasferimento.
+
+
+Il trasferimento dei dati nei volumi selezionati richiederà del tempo, a seconda delle prestazioni del sistema e della quantità di dati.
+
+[source, powershell]
+----
+./script.ps1 -SOURCE_ONTAP_CLUSTER_MGMT_IP "172.21.166.157" -SOURCE_ONTAP_CLUSTER_NAME "NTAP915_Src" -SOURCE_VSERVER "svm_NFS" -SOURCE_VOLUME_NAME "Src_RP_Vol01" -DESTINATION_ONTAP_CLUSTER_MGMT_IP "172.21.166.159" -DESTINATION_ONTAP_CLUSTER_NAME "NTAP915_Destn" -DESTINATION_VSERVER "svm_nim_nfs" -DESTINATION_AGGREGATE_NAME "NTAP915_Destn_01_VM_DISK_1" -DESTINATION_VOLUME_NAME "Dst_RP_Vol01_Vault" -DESTINATION_VOLUME_SIZE "5g" -SNAPLOCK_MIN_RETENTION "15minutes" -SNAPLOCK_MAX_RETENTION "30minutes" -SNAPMIRROR_PROTECTION_POLICY "XDPDefault" -SNAPMIRROR_SCHEDULE "5min" -DESTINATION_CLUSTER_USERNAME "admin" -DESTINATION_CLUSTER_PASSWORD "PASSWORD123"
+----

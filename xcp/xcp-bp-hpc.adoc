@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: xcp/xcp-bp-hpc.html 
+keywords: use case, gpfs, nfs 
+summary: 'Abbiamo utilizzato NetApp XCP per migrare i dati da GPFS a NFS in modo che le GPU possano elaborarli.  L"intelligenza artificiale elabora solitamente i dati da un file system di rete.' 
+---
+= Elaborazione ad alte prestazioni per ONTAP NFS
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Questo caso d'uso si basa sulle richieste delle organizzazioni sul campo.  Alcuni clienti NetApp conservano i propri dati in un ambiente di elaborazione ad alte prestazioni, che fornisce analisi dei dati per modelli di formazione e consente alle organizzazioni di ricerca di acquisire informazioni e comprendere grandi quantità di dati digitali.  I tecnici sul campo di NetApp necessitano di una procedura dettagliata per estrarre i dati dal GPFS di IBM in NFS.  Abbiamo utilizzato NetApp XCP per migrare i dati da GPFS a NFS in modo che le GPU possano elaborarli.  L'intelligenza artificiale elabora solitamente i dati da un file system di rete.
+
+Per ulteriori informazioni sul caso d'uso NFS di elaborazione ad alte prestazioni su ONTAP , una demo registrata e i risultati dei test, vedere https://blog.netapp.com/data-migration-xcp["Utilizzo di XCP per spostare dati da un Data Lake e High-Performance Computing a ONTAP NFS"^] blog.
+
+Per i passaggi dettagliati sullo spostamento dei dati MapR-FS in ONTAP NFS tramite NetApp XCP, vedere Appendice A: GPFS in NFS―Passaggi dettagliatilink:https://docs.netapp.com/us-en/netapp-solutions-ai/data-analytics/bda-ai-introduction.html["Qui"^] .

@@ -1,0 +1,96 @@
+---
+sidebar: sidebar 
+permalink: xcp/xcp-bp-netapp-xcp-overview.html 
+keywords: multithread, nas, analytics, directory tree, deletion, delete, prerequisites 
+summary: 'NetApp XCP trasferisce i dati utilizzando multithread e funzionalità personalizzabili.  È progettato per tre principali casi d"uso: spostamento o migrazione dei dati, analisi del file system ed eliminazione rapida dell"albero delle directory.' 
+---
+= NetApp XCP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+NetApp XCP trasferisce i dati utilizzando multithread e funzionalità personalizzabili.  È progettato per tre principali casi d'uso: spostamento o migrazione dei dati, analisi del file system ed eliminazione rapida dell'albero delle directory.
+
+
+
+== Spostamento o migrazione dei dati
+
+NetApp XCP trasferisce i dati da qualsiasi NAS al NAS NetApp .  Questo processo è costituito da quattro operazioni principali: scansione, copia, sincronizzazione e verifica.  Sono disponibili alcune funzionalità aggiuntive che facilitano il monitoraggio e il trasferimento dei dati:
+
+* *Scansione.*  Fornisce un layout di alto livello dei dati NAS e MapR/HDFS.
+* *Copia.*  Esegue un trasferimento di dati di base.
+* *Sincronizzazione.*  Esegue il trasferimento incrementale dei dati.
+* *Verificare.*  Esegue una verifica approfondita del target.
+* *Mostra (facoltativo).*  Scopre le condivisioni NAS.
+
+
+La figura seguente illustra le operazioni di migrazione e replica dei dati XCP.
+
+image:xcp-bp-001.png["Figura che mostra il dialogo di input/output o che rappresenta il contenuto scritto"]
+
+
+
+== Analisi del file system
+
+NetApp XCP consente in modo nativo di identificare, esaminare e analizzare i dati non strutturati per migliorare le informazioni, un requisito fondamentale per i clienti aziendali che desiderano utilizzare tali informazioni per una migliore pianificazione, per rendere operative risorse digitali di alto valore e per la governance dei dati tramite reporting e valutazione.
+
+I clienti che gestiscono dati sensibili possono utilizzare NetApp XCP per rispondere a domande operative tipiche, come le seguenti:
+
+* Dove sono i miei dati?
+* Quanti dati e quali tipi di file abbiamo?
+* Quali dati vengono utilizzati attivamente e quanti sono inattivi?
+
+
+La figura seguente illustra la comunicazione dell'analisi dei file NetApp XCP dalla GUI.
+
+image:xcp-bp-002.png["Figura che mostra il dialogo di input/output o che rappresenta il contenuto scritto"]
+
+
+
+== Eliminare
+
+Per i team di archiviazione e i carichi di lavoro di Electronic Design Automation (EDA) può essere molto impegnativo ripulire directory di grandi dimensioni, che si tratti di dati obsoleti o di dati di test che devono essere ripuliti per recuperare spazio di archiviazione.  XCP fornisce una funzionalità di eliminazione rapida che può eliminare un albero di directory completo.  La funzione NetApp XCP Delete rimuove file e cartelle da un determinato percorso NAS.  È possibile sfruttare i filtri di corrispondenza per eliminare un set specifico di file e cartelle.  Per un numero elevato di file e cartelle, è possibile utilizzare l'opzione Forza, che non richiede una conferma per l'eliminazione.
+
+
+
+== Supporto per la migrazione di sorgenti live
+
+Il supporto Live Source Migration incluso in XCP 1.7 consente la migrazione da una sorgente dati in uso attivo (attività di lettura e scrittura).  XCP esclude i file utilizzati durante il processo di migrazione, ad esempio durante l'esecuzione di copia e sincronizzazione, e le informazioni sui file ignorati vengono acquisite nel registro XCP.
+
+Questa funzionalità supporta le modifiche sulla sorgente ma non supporta le modifiche sulla destinazione.  Durante la migrazione, la destinazione non deve essere attiva.  Il supporto per la migrazione Live Source è disponibile solo per le migrazioni NFS.
+
+
+NOTE: Per le migrazioni Live Source non sono richieste impostazioni speciali.
+
+
+
+== Prerequisiti per XCP
+
+Prima di distribuire NetApp XCP, è necessario soddisfare i seguenti prerequisiti:
+
+. Verificare le porte NFS utilizzate dal server NFS eseguendo il seguente comando:
++
+....
+rpcinfo -p < NAS IP or on-prem nfs data LIF ip >
+....
+. Per accedere alla posizione in cui vengono eseguite le operazioni XCP, ad esempio istanze locali o cloud (ad esempio, istanze di macchine virtuali [VM] di Azure, AWS o Google), aprire le porte del firewall per le porte NFS.
+. Verificare che la porta NFS sia accessibile dal server XCP utilizzando il comando telnet `<on-prem nfs data LIF ip or NAS IP > 2049` .  La porta predefinita è 2049.  Se il tuo ambiente ha una porta diversa, usa quell'IP.
+. Per NFS, verificare che le condivisioni siano accessibili dal server XCP utilizzando `showmount -e < NAS IP >` comando.
+. Aumentare il numero di inode sul volume di destinazione in modo che sia maggiore del numero di file presenti nei file di origine.
+. Scarica la licenza XCP da https://xcp.netapp.com/license/xcp.xwic["Portale delle licenze NetApp XCP"^] .  
++
+.. È necessario disporre di un account NetApp su mysupport.netapp.com oppure è possibile registrarsi gratuitamente.
+.. Scarica la licenza e tienila a portata di mano.
+
+
+. Creare una condivisione NFS in locale per ogni volume di Azure NetApp o per il Cloud Volume Service (livello di servizio premium) nel cloud per il catalogo XCP.
+. Creare un volume NAS e configurare la condivisione per la destinazione dei dati.
+. Per più istanze XCP, è necessario disporre di uno o più server o istanze cloud per trasferire i dati da più cartelle o file di origine alla destinazione.
+. La dimensione maxdir (predefinita è 308 MB) definisce il numero massimo di file (circa un milione) in una singola cartella.  Aumentare il valore della dimensione maxdir per aumentare il numero di file.  L'aumento del valore ha un effetto sui cicli di CPU aggiuntivi.
+. Nel cloud, NetApp consiglia di utilizzare ExpressRoute (Azure), Direct Connect (AWS) o Cloud Interconnect (GCP) tra l'ambiente locale e il cloud.
+

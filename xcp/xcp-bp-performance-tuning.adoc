@@ -1,0 +1,38 @@
+---
+sidebar: sidebar 
+permalink: xcp/xcp-bp-performance-tuning.html 
+keywords: performance, tuning, operations, windows 
+summary: Questa sezione fornisce alcuni parametri di ottimizzazione che aiutano a migliorare le prestazioni delle operazioni XCP. 
+---
+= Ottimizzazione delle prestazioni
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Questa sezione fornisce alcuni parametri di ottimizzazione che aiutano a migliorare le prestazioni delle operazioni XCP:
+
+* Per una migliore scalabilità e per distribuire il carico di lavoro su più istanze XCP, suddividere le sottocartelle per ciascuna istanza XCP per la migrazione e il trasferimento dei dati.
+* XCP può utilizzare il massimo delle risorse della CPU: più core della CPU ci sono, migliori saranno le prestazioni.  Pertanto, dovresti avere più CPU nel server XCP.  Abbiamo testato in laboratorio 128 GB di RAM e CPU a 48 core, che hanno fornito prestazioni migliori rispetto a CPU a 8 core e 8 GB di RAM.
+* Copia XCP con il `-parallel` l'opzione si basa sul numero di CPU.  Il numero predefinito di thread paralleli (sette) è talvolta sufficiente per la maggior parte delle operazioni di trasferimento e migrazione dei dati XCP.  Per impostazione predefinita, in XCP Windows il numero di processi paralleli è uguale al numero di CPU.  Il numero massimo per il `-parallel` l'opzione dovrebbe essere inferiore o uguale al numero di core.
+* 10GbE è un buon punto di partenza per il trasferimento dati.  Tuttavia, abbiamo effettuato test con 25GbE e 100GbE, che hanno garantito un trasferimento dati migliore e sono consigliati per il trasferimento di file di grandi dimensioni.
+* Per Azure NetApp Files, le prestazioni variano in base al livello di servizio.  Per ulteriori informazioni, consultare la tabella seguente, che mostra i livelli di servizio e i dettagli sulle prestazioni Azure NetApp Files .
+
+
+|===
+| Livello di servizio | Standard | Premio | Ultra 
+
+
+| Capacità di elaborazione | 16 MBps/terabyte (TB) | 64 MBps/TB | 128 MBps/TB 
+
+
+| Tipi di carico di lavoro | Condivisioni di file, e-mail e Web per uso generale | BM, database e applicazioni | Applicazioni sensibili alla latenza 
+
+
+| Prestazioni spiegate | Prestazioni standard: 1.000 IOPS per TB (16K I/O) e 16 MBps/TB | Prestazioni premium: 4.000 IOPS per TB (16k I/O) e 64 MBps/TB | Prestazioni estreme: 8.000 IOPS per TB (16k I/O) e 128 MBps/TB 
+|===
+È necessario scegliere il livello di servizio corretto in base alla produttività e ai tipi di carico di lavoro.  La maggior parte dei clienti inizia con il livello Premium e modifica il livello di servizio in base al carico di lavoro.

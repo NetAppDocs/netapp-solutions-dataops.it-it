@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: cyber-vault/ontap-cyber-vault-ps-dr.html 
+keywords: Cyber vault, powershell, script, configuration, validation, hardening 
+summary: Questa è la soluzione NetApp ONTAP per la configurazione, il rafforzamento e la convalida di un cyber vault basato su ONTAP 
+---
+= Recupero dati da cyber vault ONTAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se i dati vengono distrutti nel data center di produzione, i dati del cyber vault possono essere recuperati in modo sicuro nell'ambiente scelto.  A differenza di una soluzione fisicamente isolata, il cyber vault ONTAP isolato è realizzato utilizzando funzionalità ONTAP native come SnapLock Compliance e SnapMirror.  Il risultato è un processo di recupero rapido e facile da eseguire.
+
+In caso di attacco ransomware e necessità di ripristino dal cyber vault, il processo di ripristino è semplice e agevole, poiché le copie snapshot ospitate nel cyber vault vengono utilizzate per ripristinare i dati crittografati.
+
+image:ontap-cyber-vault-data-recovery.png["Ripristinare la relazione"]
+
+Se il requisito è quello di fornire un metodo più rapido per riportare i dati online quando necessario, per convalidare, isolare e analizzare rapidamente i dati per il ripristino.  Ciò può essere facilmente ottenuto utilizzando FlexClone con l'opzione snaplock-type impostata su non-snaplock type.
+
+
+NOTE: A partire da ONTAP 9.13.1, è possibile ripristinare all'istante una copia Snapshot bloccata sul volume SnapLock di destinazione di una relazione di vault SnapLock creando un FlexClone con l'opzione snaplock-type impostata su "non-snaplock".  Quando si esegue l'operazione di creazione del clone del volume, specificare la copia Snapshot come "parent-snapshot".  Ulteriori informazioni sulla creazione di un volume FlexClone con un tipo SnapLocklink:https://docs.netapp.com/us-en/ontap/volumes/create-flexclone-task.html?q=volume+clone["Qui."]
+
+
+NOTE: L'esecuzione di procedure di recupero dal cyber vault garantirà che vengano stabiliti i passaggi corretti per la connessione al cyber vault e il recupero dei dati.  Pianificare e testare la procedura è essenziale per qualsiasi ripristino durante un attacco informatico.

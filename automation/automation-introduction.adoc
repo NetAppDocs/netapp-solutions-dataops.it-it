@@ -1,0 +1,34 @@
+---
+sidebar: sidebar 
+permalink: automation/automation-introduction.html 
+summary: 'L"automazione delle soluzioni NetApp consente al cliente di automatizzare la distribuzione, la configurazione e l"esecuzione di numerose attività comuni relative a infrastrutture e applicazioni.' 
+keywords: netapp, solutions, automation, ansible, terraform 
+---
+= Automazione delle soluzioni NetApp
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'automazione delle soluzioni NetApp consente al cliente di automatizzare la distribuzione, la configurazione e l'esecuzione di numerose attività comuni relative a infrastrutture e applicazioni.
+
+
+
+== Introduzione
+
+NetApp offre soluzioni per rispondere alle sfide aziendali odierne con i seguenti obiettivi:
+
+* Fornire passaggi di distribuzione e configurazione convalidati,
+* Fornire soluzioni facilmente consumabili,
+* Fornire un'implementazione di soluzioni che abbia un risultato prevedibile, sia facilmente ripetibile e scalabile nell'intera azienda del cliente.
+
+
+Per raggiungere questi obiettivi, è fondamentale che l'implementazione e la configurazione dell'infrastruttura e/o delle applicazioni fornite tramite le nostre soluzioni siano semplificate tramite l'automazione.  NetApp si impegna a semplificare l'utilizzo delle soluzioni attraverso l'automazione.
+
+Utilizzando strumenti di automazione open source come Red Hat Ansible, HashiCorp Terraform o Microsoft Powershell, le soluzioni NetApp sono in grado di automatizzare la distribuzione delle applicazioni, il provisioning del cloud, la gestione della configurazione e molte altre comuni attività IT.  Le soluzioni NetApp sfruttano gli artefatti di automazione disponibili al pubblico, oltre a fornire automazione creata da NetApp , per semplificare l'implementazione complessiva di una soluzione.
+
+Laddove siano disponibili funzionalità di automazione, il materiale collaterale della soluzione guiderà l'utente attraverso il processo di automazione della soluzione o dei passaggi della soluzione tramite gli strumenti di automazione specifici.

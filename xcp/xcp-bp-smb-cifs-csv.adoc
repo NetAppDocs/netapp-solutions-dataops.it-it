@@ -1,0 +1,38 @@
+---
+sidebar: sidebar 
+permalink: xcp/xcp-bp-smb-cifs-csv.html 
+keywords: csv, data dump 
+summary: Il comando in questa sezione scarica i dati nel formato CSV.  È possibile sommare la colonna delle dimensioni per ottenere la dimensione totale dei dati. 
+---
+= Creazione di un file CSV dalla condivisione SMB/CIFS
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il seguente comando esegue il dump dei dati nel formato CSV.  È possibile sommare la colonna delle dimensioni per ottenere la dimensione totale dei dati.
+
+....
+xcp scan -match "((now-x.atime) / 3600) > 31*day" -fmt "'{}, {}, {}, {}'.format(relpath, name, strftime(x.atime, '%y-%m-%d-%H:%M:%S'), humanize_size(size))" -preserve-atime  >file.csv
+....
+L'output dovrebbe essere simile a questo esempio:
+
+....
+erase\report_av_fp_cdot_crosstab.csvreport_av_fp_cdot_crosstab.csv20-01-29-10:26:2449.6MiB
+....
+Per eseguire la scansione fino alla profondità di tre sottodirectory e fornire il risultato in ordine di ordinamento, eseguire il comando `xcp -du` comando e scarica la dimensione a ogni livello di directory fino alla profondità di tre sottodirectory.
+
+....
+./xcp  scan -du -depth 3 NFS_Server_IP:/source_vol
+ 
+....
+Per ordinare, copia le informazioni in un file CSV e ordinale.
+
+....
+xcp scan -match "type == d" -depth 3 -fmt "'{}, {}, {}, {}'.format(name, relpath, size)" NFS_Server_IP:/share > directory_report.csv
+....
+Questo è un report personalizzato che utilizza il `-fmt` comando.  Esegue la scansione di tutte le directory e ne copia il nome, il percorso e la dimensione in un file CSV.  È possibile ordinare la colonna delle dimensioni dall'applicazione del foglio di calcolo.

@@ -1,0 +1,154 @@
+---
+sidebar: sidebar 
+keywords: Cyber vault, cybervault, cyber-vault, data protection, security, ransomware, ONTAP, FAQ 
+permalink: cyber-vault/ontap-cyber-vault-faq.html 
+summary: Questo documento contiene le domande frequenti sulla soluzione NetApp ONTAP Cyber Vault. 
+---
+= Domande frequenti sul Cyber Vault
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Queste FAQ sono destinate ai clienti e ai partner NetApp .  Risponde alle domande più frequenti sull'architettura di riferimento del cyber vault basata su ONTAP di NetApp.
+
+
+
+== Cos'è un cyber vault NetApp ?
+
+Il Cyber Vault è una tecnica specifica di protezione dei dati che prevede l'archiviazione dei dati in un ambiente isolato, separato dall'infrastruttura IT primaria.
+
+Il cyber vault è un archivio dati "air-gapped", immutabile e indelebile, immune alle minacce che colpiscono i dati primari, come malware, ransomware o minacce interne.  È possibile realizzare un cyber vault con copie immutabili di NetApp ONTAP Snapshot e renderlo indelebile con NetApp SnapLock Compliance.  Durante la protezione SnapLock Compliance , i dati non possono essere modificati o eliminati, nemmeno dagli amministratori ONTAP o dal supporto NetApp .
+
+I backup air-gapping effettuati con metodi tradizionali comportano la creazione di spazio e la separazione fisica del supporto primario e secondario.  L'air-gapping con il cyber vault prevede l'utilizzo di una rete di replicazione dei dati separata, esterna alle reti di accesso ai dati standard, per replicare le copie Snapshot in una destinazione indelebile.
+
+Ulteriori misure oltre alle reti air-gapped prevedono la disattivazione di tutti i protocolli di accesso e replicazione dei dati sul cyber vault quando non sono necessari.  Ciò impedisce l'accesso ai dati o l'esfiltrazione dei dati nel sito di destinazione.  Con SnapLock Compliance non è richiesta alcuna separazione fisica.  SnapLock Compliance protegge le tue copie Snapshot archiviate, point-in-time e di sola lettura, garantendo un rapido ripristino dei dati, al sicuro dall'eliminazione e immutabili.
+
+
+
+== L'approccio di NetApp al cyber vault
+
+NetApp Cyber Vault, basato su SnapLock, offre alle organizzazioni una soluzione completa e flessibile per proteggere le risorse di dati più critiche.  Sfruttando le tecnologie di rafforzamento di ONTAP, NetApp consente di creare un cyber vault sicuro, isolato e protetto, immune alle minacce informatiche in continua evoluzione.  Con NetApp puoi garantire la riservatezza, l'integrità e la disponibilità dei tuoi dati, mantenendo al contempo l'agilità e l'efficienza della tua infrastruttura di storage.
+
+Le caratteristiche principali dell'architettura di riferimento NetApp per un cyber vault includono:
+
+* Infrastruttura di archiviazione sicura e isolata (ad esempio, sistemi di archiviazione air-gapped)
+* Le copie di backup dei tuoi dati sono immutabili e indelebili
+* Controlli di accesso rigorosi e separati, verifica multi-amministratore e autenticazione multi-fattore
+* Capacità di ripristino rapido dei dati
+
+
+
+
+== Domande frequenti sul Cyber Vault
+
+.Cyber Vault è un prodotto NetApp?
+[%collapsible%open]
+====
+No, "cyber vault" è un termine che si applica a tutto il settore.  NetApp ha creato un'architettura di riferimento per consentire ai clienti di creare facilmente i propri archivi informatici e sfruttare le decine di funzionalità di sicurezza ONTAP per proteggere i propri dati dalle minacce informatiche.  Ulteriori informazioni sono disponibili sullink:https://docs.netapp.com/us-en/netapp-solutions/cyber-vault/ontap-cyber-vault-overview.html["Sito di documentazione ONTAP"^] .
+
+====
+.Cyber Vault di NetApp è solo un altro nome per LockVault o SnapVault?
+[%collapsible%open]
+====
+LockVault era una funzionalità di Data ONTAP 7-mode che non è disponibile nelle versioni attuali di ONTAP.
+
+SnapVault era un termine obsoleto per indicare ciò che oggi viene realizzato con la politica di vaulting di SnapMirror.  Questa policy consente alla destinazione di conservare una quantità di copie Snapshot diversa rispetto al volume di origine.
+
+Cyber Vault utilizza SnapMirror con la policy Vault e SnapLock Compliance insieme per creare una copia immutabile e indelebile dei dati.
+
+====
+.Quale hardware NetApp posso utilizzare per un cyber vault, FAS, capacity flash o performance flash?
+[%collapsible%open]
+====
+Questa architettura di riferimento per il cyber vaulting si applica all'intero portafoglio hardware ONTAP .  I clienti possono utilizzare le piattaforme AFF A-Series, AFF C-Series o FAS come caveau.  Le piattaforme basate su flash garantiranno i tempi di ripristino più rapidi, mentre le piattaforme basate su disco offriranno la soluzione più conveniente.  A seconda della quantità di dati da recuperare e se più recuperi vengono eseguiti in parallelo, l'utilizzo di sistemi basati su disco (FAS) potrebbe richiedere da giorni a settimane.  Si prega di consultare un rappresentante NetApp o un partner per dimensionare correttamente una soluzione di cyber vault in base alle esigenze aziendali.
+
+====
+.Posso utilizzare Cloud Volumes ONTAP come sorgente di cyber vault?
+[%collapsible%open]
+====
+Sì, tuttavia l'utilizzo di CVO come origine richiede che i dati vengano replicati in una destinazione di cyber vault locale, poiché la SnapLock Compliance è un requisito per un cyber vault ONTAP .  La replica dei dati da un'istanza CVO basata su hyperscaler potrebbe comportare costi di uscita.
+
+====
+.Posso utilizzare Cloud Volumes ONTAP come destinazione di un cyber vault?
+[%collapsible%open]
+====
+L'architettura Cyber Vault si basa sull'indelebilità di SnapLock Compliance di ONTAP ed è progettata per implementazioni on-premise.  Le architetture Cyber Vault basate su cloud sono in fase di studio per future pubblicazioni.
+
+====
+.Posso utilizzare ONTAP Select come sorgente di cyber vault?
+[%collapsible%open]
+====
+Sì, ONTAP Select può essere utilizzato come origine per una destinazione di cyber vault basata su hardware on-premise.
+
+====
+.Posso utilizzare ONTAP Select come destinazione di un cyber vault?
+[%collapsible%open]
+====
+No, ONTAP Select non deve essere utilizzato come destinazione di un cyber vault poiché non è in grado di utilizzare SnapLock Compliance.
+
+====
+.Un caveau informatico con NetApp utilizza solo SnapMirror?
+[%collapsible%open]
+====
+No, l'architettura di un cyber vault NetApp sfrutta numerose funzionalità ONTAP per creare una copia dei dati sicura, isolata, protetta e rafforzata.  Per maggiori informazioni su quali ulteriori tecniche possono essere utilizzate, vedere la domanda successiva.
+
+====
+.Esistono altre tecnologie o configurazioni utilizzate per il cyber vault?
+[%collapsible%open]
+====
+Le basi di un cyber vault NetApp sono SnapMirror e SnapLock Compliance, ma l'utilizzo di funzionalità ONTAP aggiuntive, come copie Snapshot antimanomissione, autenticazione a più fattori (MFA), verifica multi-amministratore, controllo degli accessi basato sui ruoli e registrazione degli audit locali e remoti, migliora la sicurezza e la protezione dei dati.
+
+====
+.Cosa rende le copie ONTAP Snapshot migliori di altre per un cyber vault?
+[%collapsible%open]
+====
+Le copie Snapshot ONTAP sono immutabili per impostazione predefinita e possono essere rese indelebili con SnapLock Compliance.  Nemmeno il supporto NetApp riesce a eliminare le copie SnapLock Snapshot.  La domanda più opportuna è: cosa rende NetApp Cyber Vault migliore rispetto ad altri Cyber Vault del settore?  Innanzitutto, ONTAP è lo storage più sicuro al mondo e ha ottenuto la convalida CSfC, che consente l'archiviazione di dati segreti e top secret a riposo sia a livello hardware che software.  Maggiori informazioni sulink:https://www.netapp.com/esg/trust-center/compliance/CSfC-Program/["Il CSfC può essere trovato qui"^] .  Inoltre, ONTAP può essere isolato a livello di storage, con il sistema di cyber vault che controlla la replica, consentendo la creazione di un isolamento all'interno della rete di cyber vault.
+
+====
+.Un volume su un cyber vault può utilizzare ONTAP Fabric Pool?
+[%collapsible%open]
+====
+No, un volume di Cyber Vault (destinazione SnapLock Compliance SnapMirror ) non può essere suddiviso in livelli tramite Fabric Pool, indipendentemente dalla policy.
+
+image:ontap-cyber-vault-fabric-pool-configurations.png["Configurazioni supportate dal pool Fabric di Cyber Vault"]
+
+
+NOTE: Esistono molteplici scenari in cui il pool Fabric *non* può essere utilizzato con un cyber vault.
+
+. I livelli freddi del Fabric Pool *non possono* utilizzare un cluster di cyber vault.  Questo perché l'abilitazione del protocollo S3 invalida la natura sicura dell'architettura di riferimento del cyber vault.  Inoltre, il bucket S3 utilizzato per il pool Fabric non può essere protetto.
+. I volumi SnapLock Compliance sul cyber vault *non possono* essere suddivisi in livelli in un bucket S3 poiché i dati sono bloccati nel volume.
+
+
+image:ontap-cyber-vault-fabric-pool-config-p-s-cv.png["Configurazioni supportate dal pool Fabric di Cyber Vault per relazioni a cascata"]
+
+====
+.ONTAP S3 Worm è disponibile in un cyber vault?
+[%collapsible%open]
+====
+No, S3 è un protocollo di accesso ai dati che invalida la natura sicura dell'architettura di riferimento.
+
+====
+.NetApp Cyber Vault funziona su una personalità o un profilo ONTAP diverso?
+[%collapsible%open]
+====
+No, è un'architettura di riferimento.  I clienti possono utilizzare illink:ontap-create-cyber-vault-task.html["architettura di riferimento"] e costruire un caveau informatico, oppure può utilizzare illink:ontap-cyber-vault-ps-overview.html["Script PowerShell per creare, rafforzare e convalidare"] un caveau informatico.
+
+====
+.Posso attivare protocolli dati come NFS, SMB e S3 in un cyber vault?
+[%collapsible%open]
+====
+Per impostazione predefinita, i protocolli dati dovrebbero essere disabilitati sul cyber vault per renderlo sicuro.  Tuttavia, è possibile abilitare i protocolli dati sul cyber vault per accedere ai dati a scopo di recupero o quando necessario.  Questa operazione dovrebbe essere eseguita temporaneamente e disattivata una volta completato il ripristino.
+
+====
+.È possibile convertire un ambiente SnapVault esistente in un cyber vault oppure è necessario riseminare tutto?
+[%collapsible%open]
+====
+Sì. Si potrebbe prendere un sistema che è una destinazione SnapMirror (con policy di vault), disabilitare i protocolli dati, rafforzare il sistema secondolink:https://docs.netapp.com/us-en/ontap/ontap-security-hardening/security-hardening-overview.html["Guida all'indurimento ONTAP"^] , isolarlo in una posizione sicura e seguire le altre procedure nell'architettura di riferimento per trasformarlo in un cyber vault senza dover effettuare il seeding della destinazione.
+
+====
+*Hai altre domande?*  Invia un'e-mail a mailto:ng-cyber-vault@netapp.com[ng-cyber-vault@netapp.com^,Domande su Cyber Vault,Vorrei saperne di più su: ] con le tue domande!  Risponderemo alle tue domande e le aggiungeremo alle FAQ.

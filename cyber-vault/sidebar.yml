@@ -1,0 +1,39 @@
+---
+section: ontap-cybervault
+title: Protezione dei dati con il cyber vault ONTAP
+pdf-filename: Cassaforte informatica ONTAP
+entries:
+- title: Panoramica del cyber vault ONTAP
+  url: "/cyber-vault/ontap-cyber-vault-overview.html"
+- title: Terminologia del caveau informatico
+  url: "/cyber-vault/ontap-cyber-vault-terminology.html"
+- title: Dimensionamento del caveau informatico per ONTAP
+  url: "/cyber-vault/ontap-cyber-vault-sizing.html"
+- title: Crea un caveau informatico
+  url: "/cyber-vault/ontap-create-cyber-vault-task.html"
+- title: Rafforzamento del caveau informatico
+  url: "/cyber-vault/ontap-cyber-vault-hardening.html"
+- title: Interoperabilità del caveau informatico
+  url: "/cyber-vault/ontap-cyber-vault-interop.html"
+- title: Domande frequenti sul Cyber Vault
+  url: "/cyber-vault/ontap-cyber-vault-faq.html"
+- title: Risorse del caveau informatico
+  url: "/cyber-vault/ontap-cyber-vault-resources.html"
+- title: Creazione, rafforzamento e convalida di un cyber vault ONTAP con PowerShell
+  entries:
+  - title: Panoramica
+    url: "/cyber-vault/ontap-cyber-vault-ps-overview.html"
+  - title: Creazione di un caveau informatico
+    url: "/cyber-vault/ontap-cyber-vault-ps-creation.html"
+  - title: Rafforzamento del caveau informatico
+    url: "/cyber-vault/ontap-cyber-vault-ps-hardening.html"
+  - title: Validazione del caveau informatico
+    url: "/cyber-vault/ontap-cyber-vault-ps-validation.html"
+  - title: Recupero dati da Cyber Vault
+    url: "/cyber-vault/ontap-cyber-vault-ps-dr.html"
+  - title: Considerazioni aggiuntive
+    url: "/cyber-vault/ontap-cyber-vault-ps-consider.html"
+  - title: Configurare, analizzare, cron script
+    url: "/cyber-vault/ontap-cyber-vault-ps-script.html"
+  - title: Conclusione sul Cyber Vault
+    url: "/cyber-vault/ontap-cyber-vault-ps-conclusion.html"
