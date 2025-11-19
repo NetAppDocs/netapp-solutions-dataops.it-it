@@ -88,7 +88,7 @@ rpcinfo -p < NAS IP or on-prem nfs data LIF ip >
 .. Scarica la licenza e tienila a portata di mano.
 
 
-. Creare una condivisione NFS in locale per ogni volume di Azure NetApp o per il Cloud Volume Service (livello di servizio premium) nel cloud per il catalogo XCP.
+. Creare una condivisione NFS in locale per ogni volume Azure NetApp o per Google Cloud NetApp Volumes (livello di servizio premium) nel cloud per il catalogo XCP.
 . Creare un volume NAS e configurare la condivisione per la destinazione dei dati.
 . Per più istanze XCP, è necessario disporre di uno o più server o istanze cloud per trasferire i dati da più cartelle o file di origine alla destinazione.
 . La dimensione maxdir (predefinita è 308 MB) definisce il numero massimo di file (circa un milione) in una singola cartella.  Aumentare il valore della dimensione maxdir per aumentare il numero di file.  L'aumento del valore ha un effetto sui cicli di CPU aggiuntivi.

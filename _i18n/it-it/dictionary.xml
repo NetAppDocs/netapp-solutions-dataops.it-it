@@ -1413,7 +1413,6 @@
   <block id="14324adbfb79ad4b6832f6a02a1275db" category="list-text">Scarica la licenza XCP da<block ref="eab886d42d2df7a710066e6d9bf6f5f5" category="inline-link-rx"></block> .  </block>
   <block id="7481213bd7173438d06de418474e428b" category="list-text">È necessario disporre di un account NetApp su mysupport.netapp.com oppure è possibile registrarsi gratuitamente.</block>
   <block id="d25e9f08475ddf6a2701e7cfbd67ff06" category="list-text">Scarica la licenza e tienila a portata di mano.</block>
-  <block id="b9611b870758eac97bd0c3bcb3fc8026" category="list-text">Creare una condivisione NFS in locale per ogni volume di Azure NetApp o per il Cloud Volume Service (livello di servizio premium) nel cloud per il catalogo XCP.</block>
   <block id="3d19c697861d11cce0f1d78d41cfea64" category="list-text">Creare un volume NAS e configurare la condivisione per la destinazione dei dati.</block>
   <block id="4f2a304b9680876edc7cb61b5c4c7134" category="list-text">Per più istanze XCP, è necessario disporre di uno o più server o istanze cloud per trasferire i dati da più cartelle o file di origine alla destinazione.</block>
   <block id="adc4e34febc2f5919cfa03870630c2fc" category="list-text">La dimensione maxdir (predefinita è 308 MB) definisce il numero massimo di file (circa un milione) in una singola cartella.  Aumentare il valore della dimensione maxdir per aumentare il numero di file.  L'aumento del valore ha un effetto sui cicli di CPU aggiuntivi.</block>
@@ -1521,4 +1520,5 @@
   <block id="1eff9302c319abb4fe8a4c919bb75125" category="sidebar">Migrazione dei dati con NetApp XCP</block>
   <block id="acf055fa7efae33ce06471f448ae1267" category="sidebar">Scenari dei clienti</block>
   <block id="c5071cdf8081474104ef1eee5ec6d784" category="sidebar">Migrazione dei dati CIFS con ACL da un box di archiviazione di origine a ONTAP</block>
+  <block id="212969b8fbef38a460a102c0de1dc0a4" category="list-text">Creare una condivisione NFS in locale per ogni volume Azure NetApp o per Google Cloud NetApp Volumes (livello di servizio premium) nel cloud per il catalogo XCP.</block>
 </blocks>
