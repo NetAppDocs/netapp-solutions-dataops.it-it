@@ -36,7 +36,7 @@ ONTAP fornisce una serie di controlli che consentono di rafforzare lo storage ON
 
 === ONTAP CLI o tramite script di automazione
 
-. Proteggi l'amministrazione con la verifica multi-amministratore (MFA)
+. Proteggi l'amministrazione con la verifica multi-amministratore (MAV) in aggiunta all'autenticazione a più fattori (MFA), migliorando la sicurezza per l'accesso amministrativo alla VM di archiviazione dati.
 . Abilita la crittografia per i dati standard "in transito" tra cluster.
 . Proteggere l'SSH con un potente sistema di crittografia e applicare password sicure.
 . Abilita FIPS globale.
