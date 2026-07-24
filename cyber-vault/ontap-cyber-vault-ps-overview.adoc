@@ -31,6 +31,7 @@ NOTE: La stessa soluzione è applicabile per creare il cyber vault designato in 
 
 
 
+[[high-level-steps-to-create-a-ontap-cyber-vault]]
 == Passaggi di alto livello per creare un cyber vault ONTAP
 
 * Creare una relazione di peering
@@ -72,6 +73,7 @@ image:ontap-cyber-vault-air-gap.png["Passaggi di alto livello per creare un cybe
 
 
 
+[[solution-components]]
 == Componenti della soluzione
 
 NetApp ONTAP in esecuzione nella versione 9.15.1 sui cluster di origine e di destinazione.

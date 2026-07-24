@@ -4,6 +4,7 @@
 
 
 
+[[capacity-sizing-considerations]]
 == Considerazioni sul dimensionamento della capacità
 
 La quantità di spazio su disco richiesta per un volume di destinazione del cyber vault ONTAP dipende da diversi fattori, il più importante dei quali è la velocità di modifica dei dati nel volume di origine.  Sia la pianificazione del backup che la pianificazione degli snapshot sul volume di destinazione influiscono sull'utilizzo del disco sul volume di destinazione e la velocità di modifica sul volume di origine non è probabile che sia costante.  È una buona idea fornire un buffer di capacità di archiviazione aggiuntiva oltre a quella necessaria per far fronte a futuri cambiamenti nel comportamento dell'utente finale o dell'applicazione.

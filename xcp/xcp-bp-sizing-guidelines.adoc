@@ -18,6 +18,7 @@ Questa sezione fornisce il tempo approssimativo necessario per eseguire le opera
 
 
 
+[[time-estimate-based-on-testing]]
 == Stima del tempo basata sui test
 
 I test per le operazioni di copia e sincronizzazione XCP hanno utilizzato lo stesso banco di prova impiegato per la distribuzione.  Sono stati creati un milione di file di tre set da 8K, 16K e 1MB e le modifiche sono state eseguite in tempo reale.  La funzione di sincronizzazione XCP ha eseguito gli aggiornamenti incrementali differenziali dall'origine alla destinazione a livello di file.  L'operazione di aggiornamento incrementale è una o più di queste quattro operazioni: rinominare file e cartelle esistenti, aggiungere dati ai file esistenti, eliminare file e cartelle e includere collegamenti hardware, software e multipli aggiuntivi.  A scopo di test, ci siamo concentrati sulle operazioni di rinomina, aggiunta, eliminazione e collegamento.  In altre parole, le operazioni di modifica quali rinomina, aggiunta ed eliminazione sono state eseguite con una frequenza di modifica compresa tra il 10% e il 90% su un milione di file.
@@ -42,6 +43,7 @@ Per le operazioni di aggiunta ed eliminazione, i file di grandi dimensioni richi
 
 
 
+[[comparing-xcp-1-6-1-to-xcp-1-5]]
 == Confronto tra XCP 1.6.1 e XCP 1.5
 
 Rispetto alle versioni precedenti, XCP 1.6.3 e 1.7 offrono prestazioni migliorate.  La sezione seguente mostra un confronto delle prestazioni di sincronizzazione tra XCP 1.6.3 e 1.7 per dimensioni di 8K, 16K e 1 MB di un milione di file.

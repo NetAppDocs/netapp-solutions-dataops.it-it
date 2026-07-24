@@ -20,10 +20,12 @@ ONTAP fornisce una serie di controlli che consentono di rafforzare lo storage ON
 
 
 
+[[hardening-best-practices]]
 == Rafforzamento delle migliori pratiche
 
 
 
+[[manual-steps]]
 === Passaggi manuali
 
 . Crea un utente designato con ruolo amministrativo predefinito e personalizzato.
@@ -34,6 +36,7 @@ ONTAP fornisce una serie di controlli che consentono di rafforzare lo storage ON
 
 
 
+[[ontap-cli-or-via-automation-script]]
 === ONTAP CLI o tramite script di automazione
 
 . Proteggi l'amministrazione con la verifica multi-amministratore (MAV) in aggiunta all'autenticazione a più fattori (MFA), migliorando la sicurezza per l'accesso amministrativo alla VM di archiviazione dati.

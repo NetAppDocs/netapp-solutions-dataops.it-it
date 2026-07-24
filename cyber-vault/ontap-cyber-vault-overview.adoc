@@ -23,6 +23,7 @@ NOTE: A partire da luglio 2024, i contenuti dei report tecnici precedentemente p
 
 
 
+[[what-is-a-cyber-vault]]
 == Cos'è un cyber vault?
 
 Un cyber vault è una tecnica specifica di protezione dei dati che prevede l'archiviazione di dati critici in un ambiente isolato, separato dall'infrastruttura IT primaria.
@@ -33,6 +34,7 @@ I backup air-gapping che utilizzano metodi tradizionali comportano la creazione 
 
 
 
+[[netapps-approach-to-cyber-vault]]
 == L'approccio di NetApp al cyber vault
 
 Le caratteristiche principali dell'architettura di riferimento NetApp per un cyber vault includono:

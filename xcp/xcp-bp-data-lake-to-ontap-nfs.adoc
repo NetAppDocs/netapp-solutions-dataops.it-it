@@ -18,6 +18,7 @@ Questo caso d'uso si basa sulla più grande proof of concept (CPOC) per clienti 
 
 
 
+[[customer-challenges-and-requirements]]
 == Sfide e requisiti dei clienti
 
 Tra le sfide e le esigenze dei clienti che vale la pena sottolineare rientrano:
@@ -29,6 +30,7 @@ Tra le sfide e le esigenze dei clienti che vale la pena sottolineare rientrano:
 
 
 
+[[data-mover-solution]]
 == Soluzione di spostamento dati
 
 In questa soluzione, il file system MapR (MapR-FS) viene creato dai dischi locali nel cluster MapR.  Il gateway NFS MapR è configurato su ciascun nodo dati con IP virtuali.  Il servizio file server archivia e gestisce i dati MapR-FS.  NFS Gateway rende i dati Map-FS accessibili dal client NFS tramite l'IP virtuale.  Un'istanza XCP è in esecuzione su ciascun nodo dati MapR per trasferire i dati dal Map NFS Gateway a NetApp ONTAP NFS.  Ogni istanza XCP trasferisce un set specifico di cartelle di origine alla posizione di destinazione.

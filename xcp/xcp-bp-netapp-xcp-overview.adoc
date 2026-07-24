@@ -18,6 +18,7 @@ NetApp XCP trasferisce i dati utilizzando multithread e funzionalità personaliz
 
 
 
+[[data-move-or-migration]]
 == Spostamento o migrazione dei dati
 
 NetApp XCP trasferisce i dati da qualsiasi NAS al NAS NetApp .  Questo processo è costituito da quattro operazioni principali: scansione, copia, sincronizzazione e verifica.  Sono disponibili alcune funzionalità aggiuntive che facilitano il monitoraggio e il trasferimento dei dati:
@@ -35,6 +36,7 @@ image:xcp-bp-001.png["Figura che mostra il dialogo di input/output o che rappres
 
 
 
+[[file-system-analytics]]
 == Analisi del file system
 
 NetApp XCP consente in modo nativo di identificare, esaminare e analizzare i dati non strutturati per migliorare le informazioni, un requisito fondamentale per i clienti aziendali che desiderano utilizzare tali informazioni per una migliore pianificazione, per rendere operative risorse digitali di alto valore e per la governance dei dati tramite reporting e valutazione.
@@ -52,12 +54,14 @@ image:xcp-bp-002.png["Figura che mostra il dialogo di input/output o che rappres
 
 
 
+[[delete]]
 == Eliminare
 
 Per i team di archiviazione e i carichi di lavoro di Electronic Design Automation (EDA) può essere molto impegnativo ripulire directory di grandi dimensioni, che si tratti di dati obsoleti o di dati di test che devono essere ripuliti per recuperare spazio di archiviazione.  XCP fornisce una funzionalità di eliminazione rapida che può eliminare un albero di directory completo.  La funzione NetApp XCP Delete rimuove file e cartelle da un determinato percorso NAS.  È possibile sfruttare i filtri di corrispondenza per eliminare un set specifico di file e cartelle.  Per un numero elevato di file e cartelle, è possibile utilizzare l'opzione Forza, che non richiede una conferma per l'eliminazione.
 
 
 
+[[live-source-migration-support]]
 == Supporto per la migrazione di sorgenti live
 
 Il supporto Live Source Migration incluso in XCP 1.7 consente la migrazione da una sorgente dati in uso attivo (attività di lettura e scrittura).  XCP esclude i file utilizzati durante il processo di migrazione, ad esempio durante l'esecuzione di copia e sincronizzazione, e le informazioni sui file ignorati vengono acquisite nel registro XCP.
@@ -69,6 +73,7 @@ NOTE: Per le migrazioni Live Source non sono richieste impostazioni speciali.
 
 
 
+[[prerequisites-for-xcp]]
 == Prerequisiti per XCP
 
 Prima di distribuire NetApp XCP, è necessario soddisfare i seguenti prerequisiti:

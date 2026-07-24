@@ -18,6 +18,7 @@ Quando si progetta e si implementa un cyber vault basato su ONTAP , è necessari
 
 
 
+[[capacity-sizing-considerations]]
 == Considerazioni sul dimensionamento della capacità
 
 La quantità di spazio su disco richiesta per un volume di destinazione del cyber vault ONTAP dipende da diversi fattori, il più importante dei quali è la velocità di modifica dei dati nel volume di origine.  Sia la pianificazione del backup che la pianificazione degli snapshot sul volume di destinazione influiscono sull'utilizzo del disco sul volume di destinazione e la velocità di modifica sul volume di origine non è probabile che sia costante.  È una buona idea fornire un buffer di capacità di archiviazione aggiuntiva oltre a quella necessaria per far fronte a futuri cambiamenti nel comportamento dell'utente finale o dell'applicazione.
@@ -72,6 +73,7 @@ NOTE: Considerare la crescita dei dati nel tempo per garantire che il dimensiona
 
 
 
+[[performance-impact-on-primary-source]]
 == Impatto sulle prestazioni su primario/sorgente
 
 Poiché il trasferimento dei dati è un'operazione pull, l'impatto sulle prestazioni dell'archiviazione primaria può variare a seconda del carico di lavoro, del volume dei dati e della frequenza dei backup.  Tuttavia, l'impatto complessivo sulle prestazioni del sistema primario è generalmente moderato e gestibile, poiché il trasferimento dei dati è progettato per scaricare le attività di protezione e backup dei dati sul sistema di archiviazione del cyber vault.  Durante la configurazione iniziale della relazione e il primo backup completo, una quantità significativa di dati viene trasferita dal sistema primario al sistema di sicurezza informatica (volume SnapLock Compliance ).  Ciò può comportare un aumento del traffico di rete e del carico I/O sul sistema primario.  Una volta completato il backup completo iniziale, ONTAP deve solo tracciare e trasferire i blocchi che sono stati modificati dall'ultimo backup.  Ciò si traduce in un carico di I/O molto più piccolo rispetto alla replica iniziale.  Gli aggiornamenti incrementali sono efficienti e hanno un impatto minimo sulle prestazioni dello storage primario.  Il processo Vault viene eseguito in background, riducendo così le possibilità di interferenze con i carichi di lavoro di produzione del sistema primario.

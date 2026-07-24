@@ -18,6 +18,7 @@ Ecco i consigli aggiuntivi per rafforzare un cyber vault ONTAP .  Per ulteriori 
 
 
 
+[[cyber-vault-hardening-recommendations]]
 == Raccomandazioni per il rafforzamento del cyber vault
 
 * Isolare i piani di gestione del cyber vault

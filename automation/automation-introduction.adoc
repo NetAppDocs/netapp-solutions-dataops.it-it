@@ -18,6 +18,7 @@ L'automazione delle soluzioni NetApp consente al cliente di automatizzare la dis
 
 
 
+[[introduction]]
 == Introduzione
 
 NetApp offre soluzioni per rispondere alle sfide aziendali odierne con i seguenti obiettivi:

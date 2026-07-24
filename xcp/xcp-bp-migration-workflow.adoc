@@ -22,6 +22,7 @@ image:xcp-bp-003.png["Figura che mostra il dialogo di input/output o che rappres
 
 
 
+[[on-premises]]
 == In sede
 
 Il flusso di lavoro di migrazione da qualsiasi NAS a NetApp NAS include i seguenti passaggi:
@@ -36,6 +37,7 @@ Il flusso di lavoro di migrazione da qualsiasi NAS a NetApp NAS include i seguen
 
 
 
+[[cloud]]
 == Nuvola
 
 Per il cloud, è possibile seguire un flusso di lavoro di migrazione on-premise simile se la connettività tra on-premise e cloud è Direct Connect (AWS), ExpressRoute (Azure) o Cloud Interconnect (GCP).

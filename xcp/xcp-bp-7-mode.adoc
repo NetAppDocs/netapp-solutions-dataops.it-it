@@ -18,6 +18,7 @@ Questa sezione fornisce i passaggi dettagliati per la migrazione dei dati da Net
 
 
 
+[[transitioning-7-mode-nfsv3-storage-to-ontap-for-nfs-data]]
 == Transizione dell'archiviazione NFSv3 a 7 modalità a ONTAP per dati NFS
 
 Questa sezione fornisce la procedura dettagliata nella tabella seguente per la transizione di un'esportazione NFSv3 7-Mode sorgente a un sistema ONTAP .
@@ -410,6 +411,7 @@ Dopo `resume` termina la copia dei file, esegui `verify` di nuovo in modo che l'
 
 
 
+[[transitioning-7-mode-volume-snapshot-copies-to-ontap]]
 == Transizione delle copie Snapshot del volume a 7 modalità su ONTAP
 
 Questa sezione illustra la procedura per la transizione di una copia di un volume NetApp Snapshot di origine in modalità 7 a ONTAP.
@@ -797,6 +799,7 @@ xcp: resume '7msnap_res1': Values marked with a * include operations before resu
 
 
 
+[[migrating-aclv4-from-netapp-7-mode-to-a-netapp-storage-system]]
 == Migrazione di ACLv4 da NetApp 7-Mode a un sistema di storage NetApp
 
 Questa sezione illustra la procedura dettagliata per la transizione di un'esportazione NFSv4 sorgente a un sistema ONTAP .
@@ -806,6 +809,7 @@ NOTE: NetApp presuppone che il volume NFSv4 di origine sia esportato e montato s
 
 
 
+[[prerequisites-for-migrating-a-source-nfsv4-export-to-ontap]]
 === Prerequisiti per la migrazione di un'esportazione NFSv4 di origine su ONTAP
 
 Prima di migrare un'esportazione NFSv4 di origine in ONTAP, è necessario soddisfare i seguenti prerequisiti:
@@ -833,6 +837,7 @@ drwxr-xr-x --- root root 4KiB 4KiB 17m43s vol1/DIR1/DIR11/DIR2/DIR22
 ....
 
 
+[[subdirectories-options]]
 === Opzioni delle sottodirectory
 
 Le due opzioni per lavorare con le sottodirectory sono le seguenti:
@@ -1251,6 +1256,7 @@ Dopo `resume` termina la copia dei file, esegui `verify` di nuovo in modo che l'
 
 
 
+[[transitioning-7-mode-smb-storage-to-ontap-for-cifs-data]]
 == Transizione dell'archiviazione SMB a 7 modalità a ONTAP per dati CIFS
 
 Questa sezione illustra la procedura dettagliata per la transizione di una condivisione SMB sorgente a 7 modalità a un sistema ONTAP .

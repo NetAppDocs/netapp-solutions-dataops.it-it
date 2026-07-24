@@ -18,6 +18,7 @@ Questa sezione illustra i passaggi di distribuzione di NetApp XCP per il trasfer
 
 
 
+[[test-bed-details]]
 == Dettagli del banco di prova
 
 La tabella seguente fornisce i dettagli del banco di prova utilizzato per questa distribuzione e convalida delle prestazioni.
@@ -56,6 +57,7 @@ La tabella seguente fornisce i dettagli del banco di prova utilizzato per questa
 |===
 
 
+[[deployment-steps-nas]]
 == Fasi di distribuzione - NAS
 
 Per distribuire NetApp XCP per il trasferimento dati, è necessario innanzitutto installare e attivare il software XCP nella posizione di destinazione.  Puoi rivedere i dettagli nel https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=63064["Guida utente NetApp XCP"^] .  Per farlo, completa i seguenti passaggi:
@@ -234,12 +236,14 @@ Per i passaggi dettagliati, vedere https://helpcenter.netwrix.com/NA/Configure_I
 
 
 
+[[deployment-steps-hdfsmaprfs-data-migration]]
 == Fasi di distribuzione - Migrazione dei dati HDFS/MapRFS
 
 In questa sezione, discuteremo la nuova funzionalità XCP denominata Hadoop Filesystem Data Transfer to NAS, che migra i dati da HDFS/MapRFS a NFS e viceversa.
 
 
 
+[[prerequisites]]
 === Prerequisiti
 
 Per la funzionalità MapRFS/HDFS, è necessario eseguire la seguente procedura in un ambiente utente non root.  Solitamente l'utente non root è hdfs, mapr o un utente che ha l'autorizzazione per apportare modifiche al file system HDFS e MapRFS.
@@ -272,6 +276,7 @@ In questa versione supportiamo le operazioni di scansione, copia e verifica XCP 
 
 
 
+[[deployment-steps-non-root-user-migrates-hdfsmaprfs-data-to-netapp-nfs]]
 === Fasi di distribuzione: l'utente non root migra i dati HDFS/MaprFS su NetApp NFS
 
 . Seguire gli stessi passaggi indicati dal punto 1 al punto 9 nella sezione relativa ai passaggi per la distribuzione.

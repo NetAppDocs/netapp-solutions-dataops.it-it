@@ -18,6 +18,7 @@ Questa pagina descrive l'automazione relativa al monitoraggio di AWS FSx ONTAP e
 
 
 
+[[overview-monitoring-and-auto-resizing-fsx-ontap-via-aws-lambda-function]]
 == Panoramica: monitoraggio e ridimensionamento automatico di FSx ONTAP tramite la funzione AWS Lambda
 
 FSx ONTAP è un servizio di archiviazione cloud di livello aziendale di prima qualità disponibile su AWS che fornisce un archivio file altamente affidabile, scalabile, ad alte prestazioni e ricco di funzionalità, basato sul famoso file system NetApp ONTAP .
@@ -72,10 +73,12 @@ image:fsxn-monitoring-resizing-architecture.png["Questa immagine illustra l'arch
 ====
 
 
+[[solution-deployment]]
 == Distribuzione della soluzione
 
 
 
+[[automated-deployment]]
 === Distribuzione automatizzata
 
 
@@ -168,6 +171,7 @@ image:fsxn-monitoring-resizing-email-002.png["Questa immagine mostra la notifica
 ====
 
 
+[[manual-deployment]]
 === Distribuzione manuale
 
 
@@ -396,6 +400,7 @@ image:fsxn-monitoring-resizing-eventbridge.png["Questa immagine mostra la finest
 ====
 
 
+[[conclusion]]
 == Conclusione
 
 Grazie alla soluzione fornita, è facile configurare una soluzione di monitoraggio che monitora regolarmente FSx ONTAP Storage, lo ridimensiona in base a una soglia specificata dall'utente e fornisce un meccanismo di avviso.  Ciò semplifica il processo di utilizzo e monitoraggio di FSx ONTAP , consentendo agli amministratori di concentrarsi sulle attività aziendali critiche, mentre lo storage aumenta automaticamente quando necessario.

@@ -18,12 +18,14 @@ Questa pagina fornisce informazioni dettagliate per la raccolta dei token di agg
 
 
 
+[[aws-authentication-requirements-for-cvo-and-connector-using-netapp-cloud-manager]]
 == Requisiti di autenticazione AWS per CVO e Connector tramite NetApp Cloud Manager
 
 Per configurare le distribuzioni automatizzate di CVO e connettori utilizzando i playbook Ansible tramite AWX/Ansible Tower, sono necessarie le seguenti informazioni:
 
 
 
+[[acquiring-accesssecret-keys-from-aws]]
 === Acquisizione di chiavi di accesso/segrete da AWS
 
 . Per distribuire CVO e Connector in Cloud Manager, abbiamo bisogno della chiave di accesso/segreta AWS.  Acquisisci le chiavi nella console AWS avviando IAM-->Utenti-->nome utente-->credenziali di sicurezza-->Crea chiave di accesso.
@@ -37,6 +39,7 @@ image:access-keys.png["Aggiorna token"]
 
 
 
+[[acquiring-refresh-token-from-netapp-cloud-central]]
 === Acquisizione del token di aggiornamento da NetApp Cloud Central
 
 . Accedi al tuo account cloud central utilizzando le credenziali del tuo account su https://services.cloud.netapp.com/refresh-token[]
@@ -47,6 +50,7 @@ image:token-authentication.png["Aggiorna token"]
 
 
 
+[[acquiring-client-id]]
 === Acquisizione dell'ID cliente
 
 . Accedi alla pagina API per copiare l'ID client su https://services.cloud.netapp.com/developer-hub[] .
@@ -58,6 +62,7 @@ image:client-id.png["ID cliente"]
 
 
 
+[[acquiring-key-pair-from-aws]]
 === Acquisizione di una coppia di chiavi da AWS
 
 . Nella console AWS, cerca "Key Pair" e crea una coppia di chiavi con "pem".  Ricorda il nome della tua coppia di chiavi, la useremo per distribuire il connettore.
@@ -67,6 +72,7 @@ image:key-pair.png["Coppia di chiavi"]
 
 
 
+[[acquiring-account-id]]
 === Acquisizione dell'ID account
 
 . In Cloud Manager, fare clic su Account -> Gestisci account, quindi copiare l'ID account da utilizzare nelle variabili per AWX.

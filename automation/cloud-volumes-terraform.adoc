@@ -18,6 +18,7 @@ Questa soluzione documenta le distribuzioni automatizzate di Cloud Volumes su AW
 
 
 
+[[pre-requisites]]
 == Prerequisiti
 
 . Terraformare >= 0,13
@@ -28,12 +29,14 @@ Questa soluzione documenta le distribuzioni automatizzate di Cloud Volumes su AW
 
 
 
+[[provider-documentation]]
 == Documentazione del fornitore
 
 La documentazione del provider Terraform per Cloud Manager è disponibile all'indirizzo:link:https://registry.terraform.io/providers/NetApp/netapp-cloudmanager/latest/docs["https://registry.terraform.io/providers/NetApp/netapp-cloudmanager/latest/docs"]
 
 
 
+[[controlling-the-provider-version]]
 === Controllo della versione del provider
 
 Tieni presente che puoi anche controllare la versione del provider.  Ciò è controllato da un blocco required_providers nella configurazione di Terraform.
@@ -55,6 +58,7 @@ Per saperne di più sul controllo della versione del provider.
 
 
 
+[[running-specific-modules]]
 == Esecuzione di moduli specifici
 
 .AWS
